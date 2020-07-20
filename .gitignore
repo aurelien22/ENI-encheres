@@ -1,2 +1,3 @@
 /build/
 context.xml
+/WebContent/META-INF/context.xml
