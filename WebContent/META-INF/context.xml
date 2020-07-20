@@ -7,7 +7,7 @@
 	
 		url="jdbc:sqlserver://localhost;databasename=encheres"
 		username="sa"
-		password="d93zexv22"
+		password=""
 		
 		maxTotal="100"
 		maxIdle="30"
