@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +9,18 @@
 <body>
 
 	<h1>Liste des encheres</h1>
+
+	<c:if test="${!empty sessionScope.sessionUtilisateur}">
+	<nav>
+		<ul>
+			<li><a>Encheres</a></li>
+			<li><a>Vendre un article</a></li>
+			<li><a>Mon profil</a></li>
+			<li><a>Deconnexion</a></li>
+		</ul>
+	</nav>
+		<p class="epsilon"><a href="<%=request.getContextPath()%>/deconnexion">Se deconnecter</a></p>
+	</c:if>
 	
 	<h3>Filtres</h3>
 	

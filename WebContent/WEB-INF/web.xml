@@ -16,4 +16,8 @@
   	<servlet-name>Inscription</servlet-name>
   	<servlet-class>servlets.Inscription</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>Deconnexion</servlet-name>
+  	<servlet-class>servlets.Deconnexion</servlet-class>
+  </servlet>
 </web-app>
