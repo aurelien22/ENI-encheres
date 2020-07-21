@@ -44,7 +44,7 @@
 	        </h4> 
 	        
 	    </form>
-    	<div class="hint-text small">Pas encore inscrit ? <a href="#" class="text-success">S'inscrire !</a></div>
+    	<div class="hint-text small">Pas encore inscrit ? <a href="<%=request.getContextPath()%>/inscription.jsp" class="text-success">S'inscrire !</a></div>
 	</div>
 </body>
 </html>

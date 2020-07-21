@@ -15,7 +15,7 @@
 
 <body>
 	<div class="container">
-  <div class="col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
+  		<div class="col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
     <div class="header">
 
       <div class="header__text-group text-center">
@@ -97,7 +97,8 @@
         </div> <!-- close .form-group -->
 
         <div class="form-group">
-          <input type="submit" value="S'inscrire" class="btn btn-primary">
+          <input type="submit" value="S'inscrire" class="btn btn-success login-btn">
+          <a href="<%=request.getContextPath()%>"><input type="button" value="Annuler" class="btn btn-success login-btn"></a>
         </div> <!-- close .form-group -->
 
         <div class="form-group text-center">
@@ -109,7 +110,7 @@
     </div> <!-- close .form -->
 
     <div class="sheet sheet--padding-small text-center">
-      <p class="epsilon">Deja inscrit ? <a href="/login">Se connecter</a></p>
+      <p class="epsilon">Deja inscrit ? <a href="<%=request.getContextPath()%>/connexion.jsp">Se connecter</a></p>
     </div>
 
   </div>
