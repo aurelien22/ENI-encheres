@@ -26,8 +26,9 @@ public class Encheres extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Liste des encheres - Page d'accueil").append(request.getContextPath());
+		
+		this.getServletContext().getRequestDispatcher("/encheres.jsp").forward(request, response);
+		
 	}
 
 	/**

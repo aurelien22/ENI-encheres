@@ -10,17 +10,26 @@
 
 	<h1>Liste des encheres</h1>
 
-	<c:if test="${!empty sessionScope.sessionUtilisateur}">
-	<nav>
-		<ul>
-			<li><a>Encheres</a></li>
-			<li><a>Vendre un article</a></li>
-			<li><a>Mon profil</a></li>
-			<li><a>Deconnexion</a></li>
-		</ul>
-	</nav>
-		<p class="epsilon"><a href="<%=request.getContextPath()%>/deconnexion">Se deconnecter</a></p>
-	</c:if>
+	<c:choose>
+		<c:when test="${!empty sessionScope.sessionUtilisateur}">
+			<nav>
+				<ul>
+					<li><a>Encheres</a></li>
+					<li><a>Vendre un article</a></li>
+					<li><a>Mon profil</a></li>
+					<li><a href="<%=request.getContextPath()%>/deconnexion">Deconnexion</a></li>
+				</ul>
+			</nav>
+		</c:when>
+		<c:when test="${empty sessionScope.sessionUtilisateur}">
+			<nav>
+				<ul>
+					<li><a href="<%=request.getContextPath()%>/inscription.jsp">S'inscrire</a></li>
+					<li><a href="<%=request.getContextPath()%>/connexion.jsp">Se connecter</a></li>
+				</ul>
+			</nav>
+		</c:when>
+	</c:choose>
 	
 	<h3>Filtres</h3>
 	
