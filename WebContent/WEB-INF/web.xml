@@ -12,4 +12,8 @@
   	<servlet-name>Encheres</servlet-name>
   	<servlet-class>servlets.Encheres</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>Inscription</servlet-name>
+  	<servlet-class>servlets.Inscription</servlet-class>
+  </servlet>
 </web-app>

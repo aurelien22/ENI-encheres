@@ -18,7 +18,32 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	@Override
 	public void insert(Utilisateur utilisateur) throws Exception {
-		// TODO Auto-generated method stub
+		
+		try {
+			
+			Connection cnx = ConnectionProvider.getConnection();
+			
+			PreparedStatement ps = cnx.prepareStatement("INSERT INTO UTILISATEURS(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+			
+			ps.setString(1, utilisateur.getPseudo());
+			ps.setString(2, utilisateur.getNom());
+			ps.setString(3, utilisateur.getPrenom());
+			ps.setString(4, utilisateur.getEmail());
+			ps.setString(5, utilisateur.getTelephone());
+			ps.setString(6, utilisateur.getRue());
+			ps.setString(7, utilisateur.getCodePostal());
+			ps.setString(8, utilisateur.getVille());
+			ps.setString(9, utilisateur.getMotDePasse());
+			ps.setInt(10, utilisateur.getCredit());
+			ps.setInt(11, utilisateur.getAdministrateur());
+			
+			ps.executeUpdate();
+			
+			cnx.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 

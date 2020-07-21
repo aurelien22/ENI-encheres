@@ -70,6 +70,33 @@ public class UtilisateurManager {
 
 	}
 	
+	public void inscrireUtilisateur(HttpServletRequest request) {
+		
+		Utilisateur utilisateur = new Utilisateur();
+		
+		utilisateur.setPseudo(getFieldValue(request, "pseudo"));
+		utilisateur.setNom(getFieldValue(request, "nom"));
+		utilisateur.setPrenom(getFieldValue(request, "prenom"));
+		utilisateur.setEmail(getFieldValue(request, "email"));
+		utilisateur.setTelephone(getFieldValue(request, "telephone"));
+		utilisateur.setRue(getFieldValue(request, "rue"));
+		utilisateur.setCodePostal(getFieldValue(request, "codepostal"));
+		utilisateur.setVille(getFieldValue(request, "ville"));
+		utilisateur.setMotDePasse(getFieldValue(request, "motdepasse"));
+		utilisateur.setCredit(100);
+		utilisateur.setAdministrateur(0);
+		
+		try {
+			this.utilisateurDAO.insert(utilisateur);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		
+		
+	}
+	
+	
 	private static String getFieldValue(HttpServletRequest request, String fieldName) {
 		
 		String value = request.getParameter(fieldName);
@@ -82,3 +109,24 @@ public class UtilisateurManager {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
