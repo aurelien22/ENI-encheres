@@ -16,6 +16,21 @@ public class UtilisateurManager {
 		
 	}
 	
+	public Utilisateur recupererUtilisateurParSonNo(int no) {
+		
+		Utilisateur utilisateur = new Utilisateur();
+		
+		try {
+			utilisateur = utilisateurDAO.selectByNo(no);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return utilisateur;
+		
+	}
+	
 	public Utilisateur connecterUtilisateur(HttpServletRequest request) {
 		
 		

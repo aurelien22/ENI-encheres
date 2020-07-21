@@ -26,7 +26,7 @@
     <hr />
     
     <div class="form-register">
-      <form name="register" method="post" action="<%=request.getContextPath()%>/inscription">
+      <form name="register" method="post" action="<%=request.getContextPath()%>/utilisateurs">
         <div class="row">
           <div class="col-xs-6">
             <div class="form-group">

@@ -13,8 +13,8 @@
   	<servlet-class>servlets.Encheres</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>Inscription</servlet-name>
-  	<servlet-class>servlets.Inscription</servlet-class>
+  	<servlet-name>GestionUtilisateurs</servlet-name>
+  	<servlet-class>servlets.GestionUtilisateurs</servlet-class>
   </servlet>
   <servlet>
   	<servlet-name>Deconnexion</servlet-name>

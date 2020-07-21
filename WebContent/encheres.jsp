@@ -16,7 +16,7 @@
 				<ul>
 					<li><a>Encheres</a></li>
 					<li><a>Vendre un article</a></li>
-					<li><a>Mon profil</a></li>
+					<li><a href="<%=request.getContextPath()%>/utilisateurs?noUtilisateur=${sessionScope.sessionUtilisateur.noUtilisateur}">Mon profil</a></li>
 					<li><a href="<%=request.getContextPath()%>/deconnexion">Deconnexion</a></li>
 				</ul>
 			</nav>

@@ -8,18 +8,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bll.UtilisateurManager;
+import bo.Utilisateur;
 
 /**
  * Servlet implementation class Inscription
  */
-@WebServlet("/inscription")
-public class Inscription extends HttpServlet {
+@WebServlet("/utilisateurs")
+public class GestionUtilisateurs extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	UtilisateurManager utilisateurManager = new UtilisateurManager();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Inscription() {
+    public GestionUtilisateurs() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +31,19 @@ public class Inscription extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		if(request.getParameter("noUtilisateur") != null) {
+			
+			Utilisateur utilisateur = new Utilisateur();
+			
+			utilisateur = utilisateurManager.recupererUtilisateurParSonNo(Integer.parseInt(request.getParameter("noUtilisateur")));
+			
+			request.setAttribute("utilisateur" , utilisateur);
+			
+			this.getServletContext().getRequestDispatcher("/profil.jsp").forward(request, response);
+			
+		}
+		
 	}
 
 	/**
@@ -37,11 +51,10 @@ public class Inscription extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		UtilisateurManager utilisateurManager = new UtilisateurManager();
-		
 		utilisateurManager.inscrireUtilisateur(request);
 		
-		doGet(request, response);
+		this.getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);
+		
 	}
 
 }
