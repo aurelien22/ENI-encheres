@@ -10,9 +10,7 @@ import java.util.List;
 import bo.Utilisateur;
 
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
-	
-	
-	Utilisateur utilisateur = new Utilisateur();
+		
 	List<Utilisateur> listeUtilisateurs = new ArrayList<Utilisateur>();
 	
 
@@ -51,6 +49,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	public Utilisateur selectByNo(int no) throws Exception {
 		
 		ResultSet rs = null;
+		
+		Utilisateur utilisateur = new Utilisateur();
 		
 		try {
 			
@@ -91,6 +91,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		
 		ResultSet rs = null;
 		
+		Utilisateur utilisateur = new Utilisateur();
+		
 		try {
 			
 			Connection cnx = ConnectionProvider.getConnection();
@@ -107,6 +109,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		
 		while(rs.next()) {
+			
 			utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
 			utilisateur.setPseudo(rs.getString("pseudo"));
 			utilisateur.setNom(rs.getString("nom"));
@@ -119,8 +122,12 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
 			utilisateur.setCredit(rs.getInt("credit"));
 			utilisateur.setAdministrateur(rs.getInt("administrateur"));
+			
+			return utilisateur;
+			
 		}
-		return utilisateur;
+		
+		return null;
 		
 	}
 		
@@ -128,6 +135,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	public Utilisateur selectByEmail(String email) throws Exception {
 		
 		ResultSet rs = null;
+		
+		Utilisateur utilisateur = new Utilisateur();
 		
 		try {
 			
@@ -145,6 +154,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		
 		while(rs.next()) {
+			
 			utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
 			utilisateur.setPseudo(rs.getString("pseudo"));
 			utilisateur.setNom(rs.getString("nom"));
@@ -157,9 +167,12 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
 			utilisateur.setCredit(rs.getInt("credit"));
 			utilisateur.setAdministrateur(rs.getInt("administrateur"));
+			
+			return utilisateur;
+			
 		}
 			
-		return utilisateur;
+		return null;
 	}
 
 	@Override
@@ -202,6 +215,58 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 			
 		return listeUtilisateurs;
+		
+	}
+
+	@Override
+	public void update(Utilisateur utilisateur) throws Exception {
+				
+		try {
+			
+			Connection cnx = ConnectionProvider.getConnection();
+			
+			PreparedStatement ps = cnx.prepareStatement("UPDATE UTILISATEURS SET pseudo = ?,nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ? WHERE no_utilisateur = ?;");
+			
+			ps.setString(1, utilisateur.getPseudo());
+			ps.setString(2, utilisateur.getNom());
+			ps.setString(3, utilisateur.getPrenom());
+			ps.setString(4, utilisateur.getEmail());
+			ps.setString(5, utilisateur.getTelephone());
+			ps.setString(6, utilisateur.getRue());
+			ps.setString(7, utilisateur.getCodePostal());
+			ps.setString(8, utilisateur.getVille());
+			ps.setString(9, utilisateur.getMotDePasse());
+			ps.setInt(10, utilisateur.getNoUtilisateur());
+			
+			ps.executeUpdate();
+			
+			cnx.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void delete(int noUtilisateur) throws Exception {
+		
+		try {
+			
+			Connection cnx = ConnectionProvider.getConnection();
+			
+			PreparedStatement ps = cnx.prepareStatement("DELETE FROM UTILISATEURS WHERE no_utilisateur = ?;");
+			
+			ps.setInt(1, noUtilisateur);
+			
+			ps.executeUpdate();
+			
+			cnx.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 	
