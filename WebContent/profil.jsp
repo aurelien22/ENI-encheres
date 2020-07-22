@@ -16,7 +16,11 @@
 	Telephone : <c:out value="${utilisateur.telephone }" /> </br>
 	Rue : <c:out value="${utilisateur.rue }" /> </br>
 	Code postal : <c:out value="${utilisateur.codePostal }" /> </br>
-	Ville : <c:out value="${utilisateur.ville }" />
-	
+	Ville : <c:out value="${utilisateur.ville }" /> </br>
+
+	<c:if test="${sessionScope.sessionUtilisateur.noUtilisateur == utilisateur.noUtilisateur}">
+		<a href="<%=request.getContextPath()%>/utilisateurs?action=modifier"><button>Modifier</button></a>
+	</c:if>	
+		
 </body>
 </html>

@@ -16,4 +16,8 @@ public interface UtilisateurDAO {
 	
 	public List<Utilisateur> select() throws Exception;
 	
+	public void update(Utilisateur utilisateur) throws Exception;
+	
+	public void delete(int noUtilisateur) throws Exception;
+	
 }

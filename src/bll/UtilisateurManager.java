@@ -1,6 +1,7 @@
 package bll;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import bo.Utilisateur;
 import dal.DAOFactory;
@@ -61,6 +62,8 @@ public class UtilisateurManager {
 				
 				utilisateur = utilisateurDAO.selectByPseudo(username);
 				
+				System.out.println("Je recherhce l'utilisateur en bdd");
+				
 			} catch (Exception e) {
 				
 				e.printStackTrace();
@@ -69,8 +72,12 @@ public class UtilisateurManager {
 			
 		}
 					
-		if(utilisateur != null) {
+		if(utilisateur == null) {
 			
+			return null;
+			
+		} else {	
+						
 			if(utilisateur.getMotDePasse().equalsIgnoreCase(password)) {
 				
 				return utilisateur;
@@ -79,10 +86,48 @@ public class UtilisateurManager {
 				return null;
 			}
 			
-		} else {			
-			return null;
 		}
 
+	}
+	
+	public void modifierUtilisateur(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		Utilisateur utilisateurBase = new Utilisateur();
+		
+		utilisateurBase = (Utilisateur)session.getAttribute("sessionUtilisateur");
+		
+		if (utilisateurBase.getMotDePasse().equalsIgnoreCase(getFieldValue(request, "motdepasseActuel"))){
+			
+			Utilisateur utilisateur = new Utilisateur();
+			
+			utilisateur.setNoUtilisateur(utilisateurBase.getNoUtilisateur());
+			utilisateur.setPseudo(getFieldValue(request, "pseudo"));
+			utilisateur.setNom(getFieldValue(request, "nom"));
+			utilisateur.setPrenom(getFieldValue(request, "prenom"));
+			utilisateur.setEmail(getFieldValue(request, "email"));
+			utilisateur.setTelephone(getFieldValue(request, "telephone"));
+			utilisateur.setRue(getFieldValue(request, "rue"));
+			utilisateur.setCodePostal(getFieldValue(request, "codepostal"));
+			utilisateur.setVille(getFieldValue(request, "ville"));
+			utilisateur.setMotDePasse(getFieldValue(request, "nouveauMotdepasse"));
+			
+			try {
+				this.utilisateurDAO.update(utilisateur);
+				
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+
+			}	
+			
+		} else {
+			
+			System.out.println("Mauvais mot de passe");
+			
+		}
+		
 	}
 	
 	public void inscrireUtilisateur(HttpServletRequest request) {
@@ -107,7 +152,18 @@ public class UtilisateurManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
+
+	}
+	
+	public void desinscrireUtilisateur(int noUtilisateur) {
 		
+		
+		try {
+			this.utilisateurDAO.delete(noUtilisateur);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
