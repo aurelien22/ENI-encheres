@@ -62,7 +62,7 @@ public class Utilisateur implements Serializable {
 
 	
 	/* GETTERS AND SETTERS */
-	
+
 	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}

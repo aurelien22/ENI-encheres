@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>ENI-encheres</display-name>
   <welcome-file-list>
-    <welcome-file>encheres</welcome-file>
+    <welcome-file>gestionArticles</welcome-file>
   </welcome-file-list>
    <servlet>
   	<servlet-name>Connexion</servlet-name>
@@ -19,5 +19,9 @@
   <servlet>
   	<servlet-name>Deconnexion</servlet-name>
   	<servlet-class>servlets.Deconnexion</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>GestionArticles</servlet-name>
+  	<servlet-class>servlets.GestionArticles</servlet-class>
   </servlet>
 </web-app>

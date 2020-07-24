@@ -59,9 +59,7 @@ public class Connexion extends HttpServlet {
 			
 			session.setAttribute("sessionUtilisateur", utilisateur);
 			
-			System.out.println("Le connexion a fonctionnee");
-			
-			this.getServletContext().getRequestDispatcher("/encheres").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/gestionArticles");
 			
 		}
 
