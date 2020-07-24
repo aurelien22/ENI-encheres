@@ -31,14 +31,20 @@ public class GestionArticles extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		
+		
 		try {
 			request.setAttribute("listeArticles", articleVenduManager.recupererToutLesArticlesAVendre());
+			
+			System.out.println("essai");
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		this.getServletContext().getRequestDispatcher("/").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/encheres.jsp").forward(request, response);
 		
 	}
 
@@ -55,7 +61,7 @@ public class GestionArticles extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		this.getServletContext().getRequestDispatcher("/").forward(request, response);
+		doGet(request, response);
 		
 		
 	}

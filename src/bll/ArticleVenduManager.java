@@ -1,6 +1,7 @@
 package bll;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,7 +59,11 @@ public class ArticleVenduManager {
 	
 	public List<ArticleVendu> recupererToutLesArticlesAVendre() throws Exception {
 		
-		return articleVenduDAO.select();
+		List<ArticleVendu> listeArticles = new ArrayList<ArticleVendu>();
+		
+		listeArticles = articleVenduDAO.select();
+		
+		return listeArticles;
 		
 	}
 	
