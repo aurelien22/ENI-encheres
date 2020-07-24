@@ -33,12 +33,14 @@
 	
 	<h3>Filtres</h3>
 	
-	<form>
-		<input type="text" />
+	<form action="<%=request.getContextPath()%>/gestionArticles?action=filtrer" method="post">
+		<input type="text" name="filtreNom"/>
 		<label>Catégorie</label>
 		<select name="categorie" id="categorie-select" size="1">
-			<option value="1">Maison
-			<option value="2">Informatique
+			<option value="tout">Tout
+			<c:forEach var="categorie" items="${categories }">
+				<option value="${categorie.no_categorie }">${categorie.libelle }
+			</c:forEach>
 		</select>
 		<input type="submit" value="Rechercher" class="btn btn-primary">
 	</form>

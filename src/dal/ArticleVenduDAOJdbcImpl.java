@@ -49,7 +49,6 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			
 			Connection cnx = ConnectionProvider.getConnection();
 			
-			System.out.println(listeArticles.size());
 			
 			PreparedStatement ps = cnx.prepareStatement("SELECT * FROM ARTICLES_VENDUS av INNER JOIN UTILISATEURS u ON av.no_utilisateur = u.no_utilisateur INNER JOIN CATEGORIES c ON c.no_categorie = av.no_categorie;");
 			
@@ -88,8 +87,6 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			e.printStackTrace();
 		
 		}
-		
-		System.out.println(listeArticles.size());
 		
 		return listeArticles;
 	}
@@ -136,6 +133,174 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 		}
 		
 		return categorieCourante;
+	}
+
+	@Override
+	public List<ArticleVendu> selectParCategorie(int no_categorie) throws Exception {
+		
+
+		List<ArticleVendu> listeArticles = new ArrayList<ArticleVendu>();
+		
+		try {
+			
+			Connection cnx = ConnectionProvider.getConnection();
+			
+			
+			PreparedStatement ps = cnx.prepareStatement("SELECT * FROM ARTICLES_VENDUS av INNER JOIN UTILISATEURS u ON av.no_utilisateur = u.no_utilisateur INNER JOIN CATEGORIES c ON c.no_categorie = av.no_categorie WHERE av.no_categorie = ?;");
+			
+			ps.setInt(1, no_categorie);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				ArticleVendu articleVendu = new ArticleVendu();
+				
+				articleVendu.setNoArticle(rs.getInt("no_article"));
+				
+				articleVendu.setNomArticle(rs.getString("nom_article"));
+				
+				articleVendu.setDescription(rs.getString("description"));
+				
+				articleVendu.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
+				
+				articleVendu.setDateFinEncheres(rs.getDate("date_fin_encheres"));
+				
+				articleVendu.setMiseAPrix(rs.getInt("prix_initial"));
+				
+				articleVendu.setPrixVente(rs.getInt("prix_vente"));
+				
+				articleVendu.setUtilisateur(utilisateurBuilder(rs));
+				
+				articleVendu.setCategorie(categorieBuilder(rs));
+				
+				listeArticles.add(articleVendu);
+				
+			}
+			
+			cnx.close();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		
+		}
+		
+		System.out.println(listeArticles.size());
+		
+		return listeArticles;
+		
+	}
+
+	@Override
+	public List<ArticleVendu> selectParFiltreNom(String filtreNom) throws Exception {
+		
+		List<ArticleVendu> listeArticles = new ArrayList<ArticleVendu>();
+		
+		try {
+			
+			Connection cnx = ConnectionProvider.getConnection();
+			
+			
+			PreparedStatement ps = cnx.prepareStatement("SELECT * FROM ARTICLES_VENDUS av INNER JOIN UTILISATEURS u ON av.no_utilisateur = u.no_utilisateur INNER JOIN CATEGORIES c ON c.no_categorie = av.no_categorie WHERE av.nom_article LIKE  ?;");
+			
+			ps.setString(1, "%" + filtreNom + "%");
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				ArticleVendu articleVendu = new ArticleVendu();
+				
+				articleVendu.setNoArticle(rs.getInt("no_article"));
+				
+				articleVendu.setNomArticle(rs.getString("nom_article"));
+				
+				articleVendu.setDescription(rs.getString("description"));
+				
+				articleVendu.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
+				
+				articleVendu.setDateFinEncheres(rs.getDate("date_fin_encheres"));
+				
+				articleVendu.setMiseAPrix(rs.getInt("prix_initial"));
+				
+				articleVendu.setPrixVente(rs.getInt("prix_vente"));
+				
+				articleVendu.setUtilisateur(utilisateurBuilder(rs));
+				
+				articleVendu.setCategorie(categorieBuilder(rs));
+				
+				listeArticles.add(articleVendu);
+				
+			}
+			
+			cnx.close();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		
+		}
+		
+		return listeArticles;
+		
+	}
+
+	@Override
+	public List<ArticleVendu> selectParCategorieEtFiltreNom(int no_categorie, String filtreNom) throws Exception {
+		
+		List<ArticleVendu> listeArticles = new ArrayList<ArticleVendu>();
+		
+		try {
+			
+			Connection cnx = ConnectionProvider.getConnection();
+			
+			
+			PreparedStatement ps = cnx.prepareStatement("SELECT * FROM ARTICLES_VENDUS av INNER JOIN UTILISATEURS u ON av.no_utilisateur = u.no_utilisateur INNER JOIN CATEGORIES c ON c.no_categorie = av.no_categorie WHERE av.no_categorie = ? AND av.nom_article LIKE  ?;");
+			
+			ps.setInt(1, no_categorie);
+			
+			ps.setString(2, "%" + filtreNom + "%");
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				ArticleVendu articleVendu = new ArticleVendu();
+				
+				articleVendu.setNoArticle(rs.getInt("no_article"));
+				
+				articleVendu.setNomArticle(rs.getString("nom_article"));
+				
+				articleVendu.setDescription(rs.getString("description"));
+				
+				articleVendu.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
+				
+				articleVendu.setDateFinEncheres(rs.getDate("date_fin_encheres"));
+				
+				articleVendu.setMiseAPrix(rs.getInt("prix_initial"));
+				
+				articleVendu.setPrixVente(rs.getInt("prix_vente"));
+				
+				articleVendu.setUtilisateur(utilisateurBuilder(rs));
+				
+				articleVendu.setCategorie(categorieBuilder(rs));
+				
+				listeArticles.add(articleVendu);
+				
+			}
+			
+			cnx.close();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		
+		}
+		
+		return listeArticles;
+		
+		
 	}
 	
 }

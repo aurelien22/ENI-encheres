@@ -67,6 +67,37 @@ public class ArticleVenduManager {
 		
 	}
 	
+	public List<ArticleVendu> filtrerLesArticlesAVendre(HttpServletRequest request) throws Exception {
+		
+		if(getFieldValue(request, "categorie") != null && getFieldValue(request, "filtreNom") == null) {
+			
+			if(getFieldValue(request, "categorie").equalsIgnoreCase("tout")) {
+				
+				return articleVenduDAO.select();
+				
+			}
+			
+			return articleVenduDAO.selectParCategorie(Integer.parseInt(getFieldValue(request, "categorie")));
+			
+		}
+		
+		if(getFieldValue(request, "filtreNom") != null && getFieldValue(request, "categorie").equalsIgnoreCase("tout")) {
+			
+			return articleVenduDAO.selectParFiltreNom(getFieldValue(request, "filtreNom"));
+			
+		}
+		
+		if(getFieldValue(request, "filtreNom") != null && !getFieldValue(request, "categorie").equalsIgnoreCase("tout")) {
+			
+			return articleVenduDAO.selectParCategorieEtFiltreNom(Integer.parseInt(getFieldValue(request, "categorie")), getFieldValue(request, "filtreNom"));
+			
+		}
+		
+		return null;
+		
+	}
+	
+	
 	private static String getFieldValue(HttpServletRequest request, String fieldName) {
 		
 		String value = request.getParameter(fieldName);
