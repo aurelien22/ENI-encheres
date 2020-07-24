@@ -48,7 +48,15 @@
 	<c:forEach var="article" items="${listeArticles}">
 	
 		<div class="article">
-			<h2>${article.nomArticle}</h2>
+			
+			<c:choose>
+				<c:when test="${!empty sessionScope.sessionUtilisateur}">
+					<h2><a href="#">${article.nomArticle}</a></h2>
+				</c:when>
+				<c:when test="${empty sessionScope.sessionUtilisateur}">
+					<h2>${article.nomArticle}</h2>
+				</c:when>
+			</c:choose>	
 			Prix : ${article.miseAPrix} points
 			</br>
 			Fin de l'enchère : ${article.dateFinEncheres }
