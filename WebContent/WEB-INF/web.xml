@@ -20,4 +20,8 @@
   	<servlet-name>Deconnexion</servlet-name>
   	<servlet-class>servlets.Deconnexion</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>GestionArticles</servlet-name>
+  	<servlet-class>servlets.GestionArticles</servlet-class>
+  </servlet>
 </web-app>
