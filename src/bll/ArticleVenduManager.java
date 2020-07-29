@@ -23,6 +23,11 @@ public class ArticleVenduManager {
 		
 	}
 	
+	public ArticleVendu afficherArticle(HttpServletRequest request) throws Exception {
+		
+		return articleVenduDAO.selectParId(Integer.parseInt(getFieldValue(request, "noArticle")));
+	}
+	
 	public void vendreUnArticle(HttpServletRequest request) throws Exception {
 		
 		ArticleVendu article = new ArticleVendu();
@@ -61,7 +66,7 @@ public class ArticleVenduManager {
 		
 		List<ArticleVendu> listeArticles = new ArrayList<ArticleVendu>();
 		
-		listeArticles = articleVenduDAO.select();
+		listeArticles = articleVenduDAO.select ();
 		
 		return listeArticles;
 		

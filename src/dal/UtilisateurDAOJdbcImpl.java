@@ -269,6 +269,28 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		
 		
 	}
+
+	@Override
+	public void debiterEnchere(Utilisateur utilisateur, int montantEnchere) throws Exception {
+		
+		try {
+			
+			Connection cnx = ConnectionProvider.getConnection();
+			
+			PreparedStatement ps = cnx.prepareStatement("UPDATE UTILISATEURS SET credit = credit - ? WHERE no_utilisateur = ?;");
+			
+			ps.setInt(1, montantEnchere);
+			ps.setInt(2, utilisateur.getNoUtilisateur());
+			
+			ps.executeUpdate();
+			
+			cnx.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 }
 

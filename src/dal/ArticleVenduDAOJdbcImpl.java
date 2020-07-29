@@ -302,6 +302,55 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 		
 		
 	}
+
+	@Override
+	public ArticleVendu selectParId(int id) throws Exception {
+		
+		ArticleVendu articleVendu = new ArticleVendu();
+		
+		try {
+			
+			Connection cnx = ConnectionProvider.getConnection();
+			
+			
+			PreparedStatement ps = cnx.prepareStatement("SELECT * FROM ARTICLES_VENDUS av INNER JOIN UTILISATEURS u ON av.no_utilisateur = u.no_utilisateur INNER JOIN CATEGORIES c ON c.no_categorie = av.no_categorie WHERE av.no_article = ?;");
+			
+			ps.setInt(1, id);
+						
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				articleVendu.setNoArticle(rs.getInt("no_article"));
+				
+				articleVendu.setNomArticle(rs.getString("nom_article"));
+				
+				articleVendu.setDescription(rs.getString("description"));
+				
+				articleVendu.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
+				
+				articleVendu.setDateFinEncheres(rs.getDate("date_fin_encheres"));
+				
+				articleVendu.setMiseAPrix(rs.getInt("prix_initial"));
+				
+				articleVendu.setPrixVente(rs.getInt("prix_vente"));
+				
+				articleVendu.setUtilisateur(utilisateurBuilder(rs));
+				
+				articleVendu.setCategorie(categorieBuilder(rs));
+				
+			}
+			
+			cnx.close();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		
+		}
+		
+		return articleVendu;
+	}
 	
 }
 

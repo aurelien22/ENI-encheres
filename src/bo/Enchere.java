@@ -2,6 +2,7 @@ package bo;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Enchere implements Serializable {
 
@@ -10,7 +11,7 @@ public class Enchere implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private LocalDateTime dateEnchere;
+	private Date dateEnchere;
 	
 	private int montantEnchere;
 	
@@ -24,7 +25,7 @@ public class Enchere implements Serializable {
 		
 	}
 
-	public Enchere(LocalDateTime dateEnchere, int montantEnchere, Utilisateur utilisateur, ArticleVendu article) {
+	public Enchere(Date dateEnchere, int montantEnchere, Utilisateur utilisateur, ArticleVendu article) {
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
 		this.utilisateur = utilisateur;
@@ -33,12 +34,12 @@ public class Enchere implements Serializable {
 
 	/* GETTERS ET SETTERS */
 	
-	public LocalDateTime getDateEnchere() {
+	public Date getDateEnchere() {
 		return dateEnchere;
 	}
 
-	public void setDateEnchere(LocalDateTime dateEnchere) {
-		this.dateEnchere = dateEnchere;
+	public void setDateEnchere(Date date) {
+		this.dateEnchere = date;
 	}
 
 	public int getMontantEnchere() {

@@ -8,6 +8,8 @@ public interface ArticleVenduDAO {
 
 	public void insert(ArticleVendu article) throws Exception;
 	
+	public ArticleVendu selectParId(int id) throws Exception;
+	
 	public List<ArticleVendu> select() throws Exception;
 	
 	public List<ArticleVendu> selectParCategorie(int no_categorie) throws Exception;

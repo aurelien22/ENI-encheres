@@ -9,10 +9,6 @@
   	<servlet-class>servlets.Connexion</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>Encheres</servlet-name>
-  	<servlet-class>servlets.Encheres</servlet-class>
-  </servlet>
-  <servlet>
   	<servlet-name>GestionUtilisateurs</servlet-name>
   	<servlet-class>servlets.GestionUtilisateurs</servlet-class>
   </servlet>
@@ -23,5 +19,9 @@
   <servlet>
   	<servlet-name>GestionArticles</servlet-name>
   	<servlet-class>servlets.GestionArticles</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>GestEncheres</servlet-name>
+  	<servlet-class>servlets.GestEncheres</servlet-class>
   </servlet>
 </web-app>

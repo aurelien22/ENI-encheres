@@ -35,6 +35,11 @@ public class ArticleVendu implements Serializable {
 	public ArticleVendu() {
 		
 	}
+	
+	public ArticleVendu(int no) {
+		this.noArticle = no;
+	}
+
 
 	public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
 			Date dateFinEncheres, int miseAPrix, int prixVente, boolean etatVente, Categorie categorie,

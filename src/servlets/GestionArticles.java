@@ -34,21 +34,39 @@ public class GestionArticles extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		
-		
-		try {
-			request.setAttribute("listeArticles", articleVenduManager.recupererToutLesArticlesAVendre());
-
-			request.setAttribute("categories", categorieManager.listerCategories());
+		if(request.getParameter("action") != null) {
+			
+			if(request.getParameter("action").equalsIgnoreCase("afficher")) {
+				
+				try {
+					
+					request.setAttribute("article", articleVenduManager.afficherArticle(request));
+					
+					this.getServletContext().getRequestDispatcher("/article.jsp").forward(request, response);
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} else {
+			
+			try {
+				
+				request.setAttribute("listeArticles", articleVenduManager.recupererToutLesArticlesAVendre());
+	
+				request.setAttribute("categories", categorieManager.listerCategories());
+				
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			this.getServletContext().getRequestDispatcher("/encheres.jsp").forward(request, response);
 			
 			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		this.getServletContext().getRequestDispatcher("/encheres.jsp").forward(request, response);
-		
+		}	
 	}
 
 	/**
