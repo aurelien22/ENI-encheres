@@ -2,6 +2,7 @@ package dal;
 
 import java.util.List;
 
+import bo.ArticleVendu;
 import bo.Utilisateur;
 
 public interface UtilisateurDAO {
@@ -21,5 +22,7 @@ public interface UtilisateurDAO {
 	public void update(Utilisateur utilisateur) throws Exception;
 	
 	public void delete(int noUtilisateur) throws Exception;
+	
+	public void recrediterAncienEncherisseurSiIlExiste(ArticleVendu article, Utilisateur utilisateur) throws Exception;
 	
 }

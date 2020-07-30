@@ -45,9 +45,11 @@ public class EnchereManager {
 			
 			if(utilisateur.getCredit() >= enchere.getMontantEnchere()) {
 				
-				enchereDAO.insert(enchere);
+				utilisateurDAO.recrediterAncienEncherisseurSiIlExiste(article, utilisateur);
 				
 				utilisateurDAO.debiterEnchere(utilisateur, enchere.getMontantEnchere());
+				
+				enchereDAO.insert(enchere);
 				
 				return "Enchère bien prise en compte";
 				

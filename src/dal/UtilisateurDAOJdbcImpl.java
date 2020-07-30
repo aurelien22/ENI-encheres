@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bo.ArticleVendu;
 import bo.Utilisateur;
 
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
@@ -291,7 +292,41 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		
 	}
-	
+
+	@Override
+	public void recrediterAncienEncherisseurSiIlExiste(ArticleVendu article, Utilisateur utilisateur) throws Exception {
+		
+		ResultSet rs = null;
+		Connection cnx;
+		
+		try {
+			
+			cnx = ConnectionProvider.getConnection();
+			
+			PreparedStatement ps = cnx.prepareStatement("SELECT u.no_utilisateur, e.no_article, e.montant_enchere FROM ENCHERES e INNER JOIN UTILISATEURS u ON e.no_utilisateur = u.no_utilisateur WHERE e.no_article = ? AND e.date_enchere = (select MAX(e.date_enchere) FROM ENCHERES e); ");
+
+			ps.setInt(1, article.getNoArticle());
+			
+			rs = ps.executeQuery();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		while(rs.next()) {
+			
+			cnx = ConnectionProvider.getConnection();
+			
+			PreparedStatement ps2 = cnx.prepareStatement("UPDATE UTILISATEURS SET credit = credit + ? WHERE no_utilisateur = ?;");
+			
+			ps2.setInt(1, rs.getInt("montant_enchere"));
+			ps2.setInt(2, rs.getInt("no_utilisateur"));
+			
+			ps2.executeUpdate();
+			
+		}
+	}
 }
 
 
